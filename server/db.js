@@ -34,7 +34,6 @@ const init = async () => {
   }
 };
 
-// Initialize the server and database setup
 init();
 
 // Define API endpoint to fetch games

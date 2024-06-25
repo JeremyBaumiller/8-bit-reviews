@@ -6,3 +6,5 @@ const useAuth = () => {
 };
 
 export default useAuth;
+
+//this needs redone using tokens instead of context and use auth check class repo for additonal help
