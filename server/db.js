@@ -1,53 +1,34 @@
-const { client, createGame, createTable, fetchGames } = require("./db");
-const express = require("express");
-const app = express();
-
-// Middleware to parse JSON bodies
-app.use(express.json());
-
-const init = async () => {
-  try {
-    // Connect to the database
-    await client.connect();
-    console.log("Connected to database");
-
-    // Create table if it doesn't exist
-    await createTable();
-    console.log("Table created");
-
-    // Populate the table with initial game data
-    await Promise.all([
-      createGame({ title: "SuperMarioWorld" }),
-      createGame({ title: "SuperPunchOut" }),
-      createGame({ title: "SuperCastlevaina" }),
-      createGame({ title: "SuperMetroid" }),
-      createGame({ title: "Spawn" }),
-      createGame({ title: "Brainlord" }),
-      createGame({ title: "ChronoTrigger" }),
-    ]);
-
-    // Start the server
-    const port = process.env.PORT || 3000;
-    app.listen(port, () => console.log(`Listening on port ${port}`));
-  } catch (error) {
-    console.error("Error during initialization:", error);
-  }
+const createTable = async () => {
+  const SQL = `drop table if exists user;
+   drop table if exists games; 
+   drop table if exists reviews;
+CREATE TABLE Users (
+    user_id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    join_date DATE NOT NULL,
+)
+CREATE TABLE Games (
+    game_id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(100) NOT NULL,
+    release_date DATE,
+    developer VARCHAR(100),
+    publisher VARCHAR(100),
+    platform VARCHAR(50),
+    genre VARCHAR(50),
+    description TEXT
+)
+CREATE TABLE Reviews (
+    review_id INT AUTO_INCREMENT PRIMARY KEY,
+    game_id INT NOT NULL,
+    user_id INT NOT NULL,
+    review_date DATE NOT NULL,
+    rating INT CHECK (rating >= 1 AND rating <= 10),
+    title VARCHAR(100),
+    content TEXT,
+    FOREIGN KEY (game_id) REFERENCES Games(game_id),
+    FOREIGN KEY (user_id) REFERENCES Users(user_id),
+)
+   `;
 };
-
-init();
-
-// Define API endpoint to fetch games
-app.get("/api/games", async (req, res, next) => {
-  try {
-    const games = await fetchGames();
-    res.send(games);
-  } catch (error) {
-    next(error);
-  }
-});
-
-// Error handling middleware
-app.use((err, req, res, next) => {
-  console.error(err);
-  res.status(500).send({ error: "Internal Server Error" });
-});
