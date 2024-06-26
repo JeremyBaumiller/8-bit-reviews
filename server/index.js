@@ -1,16 +1,13 @@
-const {
-  client,
-  createGame,
-  createTable,
-  fetchGames,
-  // ... other functions from db
-} = require("./db2");
+const { client, createGame, createTable, fetchGames } = require("./db2");
 
 const express = require("express");
+const cors = require("cors");
 const app = express();
+
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
+app.use(cors());
 
 // Connect to the database and initialize tables
 const init = async () => {
