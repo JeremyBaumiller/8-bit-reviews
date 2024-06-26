@@ -1,16 +1,28 @@
+const pg = require("pg");
+const client = new pg.Client(
+  process.env.DATABASE_URL || "postgress://localhost/8-bit-game-reviews"
+);
+
+const uuid = require("uuid");
+const bcrypt = require("bcrypt");
+
+const jwt = require("jsonwebtoken");
+const { response } = require("express");
+const JWT = process.env.JWT || "shhh";
+
 const createTable = async () => {
-  const SQL = `drop table if exists user;
-   drop table if exists games; 
-   drop table if exists reviews;
-CREATE TABLE Users (
-    user_id INT AUTO_INCREMENT PRIMARY KEY,
+  const SQL = `DROP TABLE IF EXISTS users;
+   DROP TABLE IF EXISTS games; 
+   DROP TABLE IF EXISTS reviews;
+CREATE TABLE users (
+    id UUID PRIMARY KEY,
     username VARCHAR(50) NOT NULL UNIQUE,
     email VARCHAR(100) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
     join_date DATE NOT NULL,
 )
-CREATE TABLE Games (
-    game_id INT AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE games (
+    id UUID PRIMARY KEY,
     title VARCHAR(100) NOT NULL,
     release_date DATE,
     developer VARCHAR(100),
@@ -66,3 +78,38 @@ CREATE TABLE Reviews (
 )
    `;
 };
+
+const createGame = async ({
+  title,
+  release_date,
+  developer,
+  publisher,
+  platform,
+  genre,
+  description,
+  ESRB_Rating,
+  image_url,
+}) => {
+  const SQL = `INSERT INTO games (id, title, release_date, developer, publisher, platform, genre, description, ESRB_Rating, image_url) 
+                VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING * `;
+  const response = await client.query(SQL, [
+    uuid.v4(),
+    title,
+    release_date,
+    developer,
+    publisher,
+    platform,
+    genre,
+    description,
+    ESRB_Rating,
+    image_url,
+  ]);
+};
+
+const fetchGames = async () => {
+  const SQL = `SELECT * FROM games`;
+  const response = await client.query(SQL);
+  return response.rows;
+};
+
+module.exports = { client, createGame, createTable, fetchGames };
