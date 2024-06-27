@@ -108,7 +108,8 @@ const init = async () => {
       description:
         "Mega Man 2 follows Mega Man in his quest to defeat Dr. Wily and his Robot Masters using various weapons obtained from defeated bosses.",
       esrb_rating: "E",
-      image_url: "8-bit-reviews/client/public/covers/7.Megaman2.jpg",
+      image_url:
+        "https://upload.wikimedia.org/wikipedia/en/b/be/Megaman2_box.jpg",
     }),
     createGame({
       title: "Final Fantasy VII",
@@ -120,7 +121,8 @@ const init = async () => {
       description:
         "Final Fantasy VII is an epic RPG where players control Cloud Strife and his allies to stop the villain Sephiroth from destroying the world.",
       esrb_rating: "T",
-      image_url: "8-bit-reviews/client/public/covers/8.Final_Fantasy_VII.jpg",
+      image_url:
+        "https://upload.wikimedia.org/wikipedia/en/c/c2/Final_Fantasy_VII_Box_Art.jpg",
     }),
     createGame({
       title: "Chrono Trigger",
@@ -132,7 +134,7 @@ const init = async () => {
       description:
         "Chrono Trigger follows Crono and his friends as they travel through time to prevent a global catastrophe orchestrated by the powerful Lavos.",
       esrb_rating: "E",
-      image_url: "8-bit-reviews/client/public/covers/9.Chrono_Trigger.jpg",
+      image_url: "https://i.servimg.com/u/f10/20/12/92/19/tm/chrono15.png",
     }),
     createGame({
       title: "Castlevania: Symphony of the Night",
@@ -145,7 +147,7 @@ const init = async () => {
         "Castlevania: Symphony of the Night stars Alucard as he explores Dracula's castle to uncover secrets and defeat powerful creatures.",
       esrb_rating: "T",
       image_url:
-        "8-bit-reviews/client/public/covers/10.Castlevania_SOTN_PAL.jpg",
+        "https://upload.wikimedia.org/wikipedia/en/c/cf/Castlevania_SOTN_PAL.jpg",
     }),
     createGame({
       title: "Super Metroid",
@@ -157,7 +159,8 @@ const init = async () => {
       description:
         "Super Metroid follows Samus Aran in her mission to rescue the baby Metroid from the Space Pirates and Mother Brain on planet Zebes.",
       esrb_rating: "E",
-      image_url: "8-bit-reviews/client/public/covers/11.Smetroid.jpg",
+      image_url:
+        "https://upload.wikimedia.org/wikipedia/en/e/e4/Smetroidbox.jpg",
     }),
     createGame({
       title: "Half-Life",
@@ -169,7 +172,8 @@ const init = async () => {
       description:
         "Half-Life is a groundbreaking FPS where players assume the role of Gordon Freeman as he battles aliens and government soldiers in the Black Mesa Research Facility.",
       esrb_rating: "M",
-      image_url: "8-bit-reviews/client/public/covers/12.Half-Life.jpg",
+      image_url:
+        "https://upload.wikimedia.org/wikipedia/en/thumb/f/fa/Half-Life_Cover_Art.jpg/220px-Half-Life_Cover_Art.jpg",
     }),
     createGame({
       title: "Doom",
@@ -181,7 +185,8 @@ const init = async () => {
       description:
         "Doom is a pioneering FPS game where players fight against demons from Hell on Mars as the unnamed space marine, known as Doomguy.",
       esrb_rating: "M",
-      image_url: "8-bit-reviews/client/public/covers/13.Doom.jpg",
+      image_url:
+        "https://upload.wikimedia.org/wikipedia/en/5/57/Doom_cover_art.jpg",
     }),
     createGame({
       title: "The Secret of Monkey Island",
@@ -194,7 +199,7 @@ const init = async () => {
         "The Secret of Monkey Island follows Guybrush Threepwood as he seeks to become a pirate and rescue the governor from the ghost pirate LeChuck.",
       esrb_rating: "E",
       image_url:
-        "8-bit)-reviews/client/public/covers/14.The_Secret_of_Monkey_Island.jpg",
+        "https://upload.wikimedia.org/wikipedia/en/a/a8/The_Secret_of_Monkey_Island_artwork.jpg",
     }),
     createGame({
       title: "Metroid",
@@ -206,7 +211,8 @@ const init = async () => {
       description:
         "Metroid introduces players to Samus Aran as she explores the planet Zebes to eradicate the Space Pirates and Mother Brain.",
       esrb_rating: "E",
-      image_url: "8-bit-reviews/client/public/covers/15.Metroid.jpg",
+      image_url:
+        "https://upload.wikimedia.org/wikipedia/en/thumb/5/5d/Metroid_boxart.jpg/220px-Metroid_boxart.jpg",
     }),
     createGame({
       title: "EarthBound",
@@ -218,7 +224,8 @@ const init = async () => {
       description:
         "EarthBound follows Ness and his friends as they embark on a journey to stop the alien Giygas from taking over the world using psychic powers and humor.",
       esrb_rating: "E",
-      image_url: "8-bit-reviews/client/public/covers/16.EarthBound.jpg",
+      image_url:
+        "https://upload.wikimedia.org/wikipedia/en/1/1f/EarthBound_Box.jpg",
     }),
     createGame({
       title: "Star Fox",
@@ -230,7 +237,8 @@ const init = async () => {
       description:
         "Star Fox is a rail shooter where players control Fox McCloud and his team of anthropomorphic animals in spacecrafts to defend the Lylat system from Andross.",
       esrb_rating: "E",
-      image_url: "8-bit-reviews/client/public/covers/17.Star_Fox.jpg",
+      image_url:
+        "https://upload.wikimedia.org/wikipedia/en/5/52/Star_Fox_SNES.jpg",
     }),
     createGame({
       title: "Kirby's Adventure",
@@ -242,7 +250,8 @@ const init = async () => {
       description:
         "Kirby's Adventure stars Kirby, a pink puffball with the ability to inhale enemies and gain their powers, on a quest to restore the Star Rod and save Dream Land from darkness.",
       esrb_rating: "E",
-      image_url: "8-bit-reviews/client/public/covers/18.Kirby_Adventure.jpg",
+      image_url:
+        "https://upload.wikimedia.org/wikipedia/en/thumb/a/ae/Kirby%27s_Adventure_Coverart.png/220px-Kirby%27s_Adventure_Coverart.png",
     }),
     createGame({
       title: "Contra",
@@ -254,7 +263,8 @@ const init = async () => {
       description:
         "Contra is a run-and-gun game where players control soldiers Bill and Lance in their mission to thwart an alien invasion by destroying enemy forces and bosses.",
       esrb_rating: "E",
-      image_url: "8-bit-reviews/client/public/covers/19.Contra.jpg",
+      image_url:
+        "https://upload.wikimedia.org/wikipedia/en/6/65/Contra_cover.jpg",
     }),
     createGame({
       title: "Duck Hunt",
@@ -266,7 +276,8 @@ const init = async () => {
       description:
         "Duck Hunt is a light gun shooter where players use the NES Zapper to shoot ducks and clay pigeons as they appear on the screen.",
       esrb_rating: "E",
-      image_url: "8-bit-reviews/client/public/covers/20.DuckHunt.jpg",
+      image_url:
+        "https://upload.wikimedia.org/wikipedia/en/thumb/1/14/DuckHuntBox.jpg/220px-DuckHuntBox.jpg",
     }),
     createGame({
       title: "Tetris",
@@ -278,7 +289,8 @@ const init = async () => {
       description:
         "Tetris is a tile-matching puzzle game where players rotate and arrange falling tetrominoes to create complete lines and prevent the stack from reaching the top of the screen.",
       esrb_rating: "E",
-      image_url: "8-bit-reviews/client/public/covers/21.Tetris.jpg",
+      image_url:
+        "https://upload.wikimedia.org/wikipedia/en/4/4a/Tetris_Boxshot.jpg",
     }),
     createGame({
       title: "Mortal Kombat",
@@ -290,7 +302,8 @@ const init = async () => {
       description:
         "Mortal Kombat is a fighting game known for its brutal combat and fatalities as players choose iconic fighters to battle in a tournament for supremacy.",
       esrb_rating: "M",
-      image_url: "8-bit-reviews/client/public/covers/22.Mortal_Kombat.jpg",
+      image_url:
+        "https://upload.wikimedia.org/wikipedia/en/3/33/Mortal_Kombat_cover.JPG",
     }),
     createGame({
       title: "Resident Evil",
@@ -302,7 +315,8 @@ const init = async () => {
       description:
         "Resident Evil follows Chris Redfield and Jill Valentine of S.T.A.R.S. as they investigate a mansion filled with zombies and uncover the Umbrella Corporation's sinister experiments.",
       esrb_rating: "M",
-      image_url: "8-bit-reviews/client/public/covers/23.resident_evil.jpg",
+      image_url:
+        "https://upload.wikimedia.org/wikipedia/en/a/a6/Resident_Evil_1_cover.png",
     }),
     createGame({
       title: "Pokemon Red/Blue",
@@ -315,7 +329,7 @@ const init = async () => {
         "Pokemon Red/Blue tasks players with becoming a Pokemon Trainer, capturing and training Pokemon to become the Pokemon Champion while thwarting Team Rocket's evil plans.",
       esrb_rating: "E",
       image_url:
-        "8-bit-reviews/client/public/covers/24.pokemon_red_version.jpg",
+        "https://pm1.aminoapps.com/6315/316ff2f9adf15e6b32b2b8aaf817b44bc4cff334_00.jpg",
     }),
     createGame({
       title: "GoldenEye 007",
@@ -327,7 +341,8 @@ const init = async () => {
       description:
         "GoldenEye 007 is an FPS where players assume the role of James Bond in a mission to stop a criminal syndicate from using a satellite weapon to destroy London.",
       esrb_rating: "T",
-      image_url: "8-bit-reviews/client/public/covers/25.goldeneye.jpg",
+      image_url:
+        "https://upload.wikimedia.org/wikipedia/en/3/36/GoldenEye007box.jpg",
     }),
     createGame({
       title: "The Legend of Zelda: Ocarina of Time",
@@ -339,7 +354,8 @@ const init = async () => {
       description:
         "The Legend of Zelda: Ocarina of Time follows Link as he travels through time to stop Ganondorf from obtaining the Triforce and conquering the kingdom of Hyrule.",
       esrb_rating: "E",
-      image_url: "8-bit-reviews/client/public/covers/26.zelda_64.jpg",
+      image_url:
+        "https://upload.wikimedia.org/wikibooks/en/9/98/Ocarina_of_Time_box_art.jpg",
     }),
     createGame({
       title: "Gran Turismo",
@@ -351,7 +367,8 @@ const init = async () => {
       description:
         "Gran Turismo is a racing simulator where players compete in various races and challenges to earn credits and unlock new cars for their collection.",
       esrb_rating: "E",
-      image_url: "8-bit-reviews/client/public/covers/27.Gran_Turismo.jpg",
+      image_url:
+        "https://upload.wikimedia.org/wikipedia/en/c/c8/Gran_Turismo_-_Cover_-_JP.jpg",
     }),
     createGame({
       title: "Metal Gear Solid",
@@ -363,7 +380,8 @@ const init = async () => {
       description:
         "Metal Gear Solid follows Solid Snake as he infiltrates a nuclear weapons facility to neutralize terrorists threatening to launch a nuclear strike.",
       esrb_rating: "M",
-      image_url: "8-bit-reviews/client/public/covers/28.metal_gear_solid.jpg",
+      image_url:
+        "https://upload.wikimedia.org/wikipedia/en/3/33/Metal_Gear_Solid_cover_art.png",
     }),
     createGame({
       title: "Crash Bandicoot",
@@ -375,7 +393,8 @@ const init = async () => {
       description:
         "Crash Bandicoot stars Crash in his quest to rescue his girlfriend Tawna and thwart the evil plans of Dr. Neo Cortex by traversing various levels and defeating enemies.",
       esrb_rating: "E",
-      image_url: "8-bit-reviews/client/public/covers/29.crash_bandicoot.jpg",
+      image_url:
+        "https://upload.wikimedia.org/wikipedia/en/4/44/Crash_Bandicoot_Cover.png",
     }),
     createGame({
       title: "Tony Hawk's Pro Skater",
@@ -387,7 +406,8 @@ const init = async () => {
       description:
         "Tony Hawk's Pro Skater allows players to skate as legendary skateboarders in various locations, performing tricks and completing objectives to earn points and unlock new content.",
       esrb_rating: "T",
-      image_url: "8-bit-reviews/client/public/covers/30.TonyHawksProSkater.jpg",
+      image_url:
+        "https://upload.wikimedia.org/wikipedia/en/thumb/5/58/TonyHawksProSkaterPlayStation1.jpg/220px-TonyHawksProSkaterPlayStation1.jpg",
     }),
     createGame({
       title: "StarCraft",
@@ -399,7 +419,8 @@ const init = async () => {
       description:
         "StarCraft is a real-time strategy game where players control one of three factions in a war for dominance across the galaxy by gathering resources, building bases, and commanding armies.",
       esrb_rating: "T",
-      image_url: "8-bit-reviews/client/public/covers/31.StarCraft.jpg",
+      image_url:
+        "https://upload.wikimedia.org/wikipedia/en/9/93/StarCraft_box_art.jpg",
     }),
     createGame({
       title: "Diablo II",
@@ -411,7 +432,8 @@ const init = async () => {
       description:
         "Diablo II is an action RPG where players embark on a quest to defeat the Lord of Terror, Diablo, by exploring dungeons, collecting loot, and battling hordes of monsters.",
       esrb_rating: "M",
-      image_url: "8-bit-reviews/client/public/covers/32.diable_II.jpg",
+      image_url:
+        "https://upload.wikimedia.org/wikipedia/en/d/d5/Diablo_II_Coverart.png",
     }),
   ]);
 
