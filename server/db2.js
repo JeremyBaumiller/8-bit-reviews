@@ -25,8 +25,8 @@ CREATE TABLE games (
     release_date INT,
     developer VARCHAR(100),
     publisher VARCHAR(100),
-    platform VARCHAR(50),
-    genre VARCHAR(50),
+    platform VARCHAR(250),
+    genre VARCHAR(250),
     description TEXT,
     ESRB_Rating VARCHAR(5),
     image_url TEXT
