@@ -10,6 +10,7 @@ const GameListPage = () => {
       .catch((error) => console.error("Error fetching games:", error));
   }, []);
 
+  console.log(games);
   return (
     <div>
       <h1>Game List</h1>

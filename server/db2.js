@@ -29,7 +29,7 @@ CREATE TABLE games (
     genre VARCHAR(50),
     description TEXT,
     ESRB_Rating VARCHAR(5),
-    image_url VARCHAR(255)
+    image_url TEXT
     );
 CREATE TABLE reviews (
     id UUID PRIMARY KEY,

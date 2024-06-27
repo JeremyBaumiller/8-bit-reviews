@@ -9,6 +9,7 @@ import GameListPage from "./components/GameListPage";
 import GameDetailPage from "./components/GameDetailPage";
 import SubmitReviewPage from "./components/SubmitReviewPage";
 import UserProfilePage from "./components/UserProfilePage";
+import RegistrationPage from "./components/RegistrationPage";
 import "./App.css";
 
 const App = () => {
@@ -44,6 +45,7 @@ const App = () => {
           path="/login"
           element={<LoginPage handleLogin={handleLogin} />}
         />
+        <Route path="/register" element={<RegistrationPage />} />
       </Routes>
       <Footer />
     </div>

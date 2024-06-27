@@ -1,21 +1,21 @@
 import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-function LoginPage({ handleLogin }) {
+function RegistrationPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
   const navigate = useNavigate();
 
   const onSubmit = (e) => {
     e.preventDefault();
-    // validate credentials here
-    handleLogin();
-    navigate("/");
+    // handle registration logic here
+    navigate("/login");
   };
 
   return (
     <div>
-      <h2>Login</h2>
+      <h2>Register</h2>
       <form onSubmit={onSubmit}>
         <div>
           <label>Username:</label>
@@ -33,13 +33,18 @@ function LoginPage({ handleLogin }) {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <button type="submit">Login</button>
+        <div>
+          <label>Email:</label>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+        <button type="submit">Register</button>
       </form>
-      <p>
-        Don't have an account? <Link to="/register">Register here</Link>
-      </p>
     </div>
   );
 }
 
-export default LoginPage;
+export default RegistrationPage;
