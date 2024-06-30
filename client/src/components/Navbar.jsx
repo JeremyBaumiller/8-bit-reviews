@@ -2,7 +2,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Navbar = () => (
-  <nav className="navbar navbar-expand-lg navbar-light bg-light">
+  <nav
+    className="navbar navbar-expand-sm navbar-dark bg-dark fixed-top"
+    style={{
+      height: "60px", //height
+    }}
+  >
     <div className="container">
       <Link className="navbar-brand" to="/">
         <img
