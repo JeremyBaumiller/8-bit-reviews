@@ -10,6 +10,7 @@ import GameDetailPage from "./components/GameDetailPage";
 import SubmitReviewPage from "./components/SubmitReviewPage";
 import UserProfilePage from "./components/UserProfilePage";
 import RegistrationPage from "./components/RegistrationPage";
+import "bootstrap";
 import "./App.css";
 
 const App = () => {

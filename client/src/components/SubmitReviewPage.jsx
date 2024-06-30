@@ -11,7 +11,7 @@ const SubmitReviewPage = () => {
     // Submit the review to the server or store it in state
     console.log("Review submitted:", { review, rating });
 
-    // Redirect to the home page or another page after submission
+    // Redirect to the home page after submission
     navigate("/");
   };
 

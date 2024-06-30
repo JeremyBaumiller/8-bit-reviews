@@ -1,7 +1,16 @@
-const { client, createGame, createTable, fetchGames } = require("./db2");
+const {
+  client,
+  createGame,
+  createTable,
+  fetchGames,
+  fetchGame,
+  createReview,
+  fetchReviewsByGameId,
+} = require("./db2");
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
+
 const { options } = require("pg/lib/defaults");
 const app = express();
 
@@ -20,6 +29,107 @@ const init = async () => {
   //console.log(await fetchGames());
   console.log("Table created");
 
+  const users = [
+    {
+      id: "c8d5c0b4-1fd1-4b6d-9e77-4d3f847dc7db",
+      username: "Mario",
+      email: "mario@example.com",
+      password: "password1",
+      join_date: "2023-01-01",
+    },
+    {
+      id: "7c9e6679-7425-40de-944b-e07fc1f90ae7",
+      username: "Link",
+      email: "link@example.com",
+      password: "password2",
+      join_date: "2023-02-01",
+    },
+    {
+      id: "bbeb7643-7c77-4443-8f6b-4d72b4f7cbbe",
+      username: "Samus",
+      email: "samus@example.com",
+      password: "password3",
+      join_date: "2023-03-01",
+    },
+    {
+      id: "32c8db2f-9e0b-4d7d-9ff7-f72f3fef482f",
+      username: "LaraCroft",
+      email: "laracroft@example.com",
+      password: "password6",
+      join_date: "2023-06-01",
+    },
+    {
+      id: "c1e19d5f-7955-40b4-92b4-e0b0e5a2a4b4",
+      username: "MasterChief",
+      email: "masterchief@example.com",
+      password: "password7",
+      join_date: "2023-07-01",
+    },
+    {
+      id: "ab3e2899-6055-4d1f-b3e2-ffdbd05d7c4d",
+      username: "Kratos",
+      email: "kratos@example.com",
+      password: "password8",
+      join_date: "2023-08-01",
+    },
+    {
+      id: "fde0b94a-5280-42d9-ae3d-1c2e7f7a2b4d",
+      username: "Cloud",
+      email: "cloud@example.com",
+      password: "password10",
+      join_date: "2023-10-01",
+    },
+    {
+      id: "bbd17643-7c77-4443-8f6b-4d72b4f7cbca",
+      username: "NathanDrake",
+      email: "nathandrake@example.com",
+      password: "password13",
+      join_date: "2024-01-01",
+    },
+    {
+      id: "f3f5a8d8-f24e-4d36-8a91-329ddf9d0e66",
+      username: "Dante",
+      email: "dante@example.com",
+      password: "password15",
+      join_date: "2024-03-01",
+    },
+    {
+      id: "32d8eb2f-9e0b-4d7d-9ff7-f72f3fef593f",
+      username: "GordonFreeman",
+      email: "gordonfreeman@example.com",
+      password: "password16",
+      join_date: "2024-04-01",
+    },
+    {
+      id: "c1f29d5f-7955-40b4-92b4-e0b0e5a2a5b5",
+      username: "SolidSnake",
+      email: "solidsnake@example.com",
+      password: "password17",
+      join_date: "2024-05-01",
+    },
+    {
+      id: "ab4f2899-6055-4d1f-b3e2-ffdbd05d8d5d",
+      username: "Ellie",
+      email: "ellie@example.com",
+      password: "password18",
+      join_date: "2024-06-01",
+    },
+    {
+      id: "7d60b8d9-6859-4f3b-ae3f-3fb0d7c9d8e4",
+      username: "JillValentine",
+      email: "jillvalentine@example.com",
+      password: "password19",
+      join_date: "2024-07-01",
+    },
+    {
+      id: "fde1b94a-5280-42d9-ae3d-1c2e7f7a2b5e",
+      username: "CommanderShepard",
+      email: "commandershepard@example.com",
+      password: "password20",
+      join_date: "2024-08-01",
+    },
+  ];
+
   const [] = await Promise.all([
     createGame({
       title: "Super Mario Bros.",
@@ -30,7 +140,7 @@ const init = async () => {
       genre: "Platformer",
       description:
         "Super Mario Bros. is a classic platformer where players control Mario as he navigates the Mushroom Kingdom to rescue Princess Toadstool from Bowser.",
-      esrb_rating: "E",
+      ESRB_Rating: "E",
       image_url:
         "https://upload.wikimedia.org/wikipedia/en/0/03/Super_Mario_Bros._box.png",
     }),
@@ -43,7 +153,7 @@ const init = async () => {
       genre: "Action-Adventure",
       description:
         "The Legend of Zelda follows Link as he embarks on a quest to rescue Princess Zelda and defeat the evil Ganon by exploring dungeons and solving puzzles.",
-      esrb_rating: "E",
+      ESRB_Rating: "E",
       image_url:
         "https://upload.wikimedia.org/wikipedia/en/4/41/Legend_of_zelda_cover_%28with_cartridge%29_gold.png",
     }),
@@ -56,7 +166,7 @@ const init = async () => {
       genre: "Platformer",
       description:
         "Sonic the Hedgehog introduces Sonic, a speedy blue hedgehog, in his quest to stop the evil Dr. Robotnik from taking over the world.",
-      esrb_rating: "E",
+      ESRB_Rating: "E",
       image_url:
         "https://upload.wikimedia.org/wikipedia/en/b/ba/Sonic_the_Hedgehog_1_Genesis_box_art.jpg",
     }),
@@ -69,7 +179,7 @@ const init = async () => {
       genre: "Platformer",
       description:
         "Donkey Kong is an arcade classic where players control Jumpman (Mario) to rescue Pauline from Donkey Kong.",
-      esrb_rating: "E",
+      ESRB_Rating: "E",
       image_url:
         "https://upload.wikimedia.org/wikipedia/en/1/14/Donkey_Kong_flier.jpg",
     }),
@@ -82,7 +192,7 @@ const init = async () => {
       genre: "Puzzle",
       description:
         "Pac-Man is a classic arcade game where players control Pac-Man to eat pellets and avoid ghosts.",
-      esrb_rating: "E",
+      ESRB_Rating: "E",
       image_url: "https://upload.wikimedia.org/wikipedia/en/1/16/Pac_flyer.png",
     }),
     createGame({
@@ -94,7 +204,7 @@ const init = async () => {
       genre: "Fighting",
       description:
         "Street Fighter II is a popular fighting game featuring iconic characters battling against each other in competitive matches.",
-      esrb_rating: "T",
+      ESRB_Rating: "T",
       image_url:
         "https://upload.wikimedia.org/wikipedia/en/1/1d/SF2_JPN_flyer.jpg",
     }),
@@ -107,7 +217,7 @@ const init = async () => {
       genre: "Platformer",
       description:
         "Mega Man 2 follows Mega Man in his quest to defeat Dr. Wily and his Robot Masters using various weapons obtained from defeated bosses.",
-      esrb_rating: "E",
+      ESRB_Rating: "E",
       image_url:
         "https://upload.wikimedia.org/wikipedia/en/b/be/Megaman2_box.jpg",
     }),
@@ -120,7 +230,7 @@ const init = async () => {
       genre: "RPG",
       description:
         "Final Fantasy VII is an epic RPG where players control Cloud Strife and his allies to stop the villain Sephiroth from destroying the world.",
-      esrb_rating: "T",
+      ESRB_Rating: "T",
       image_url:
         "https://upload.wikimedia.org/wikipedia/en/c/c2/Final_Fantasy_VII_Box_Art.jpg",
     }),
@@ -133,7 +243,7 @@ const init = async () => {
       genre: "RPG",
       description:
         "Chrono Trigger follows Crono and his friends as they travel through time to prevent a global catastrophe orchestrated by the powerful Lavos.",
-      esrb_rating: "E",
+      ESRB_Rating: "E",
       image_url: "https://i.servimg.com/u/f10/20/12/92/19/tm/chrono15.png",
     }),
     createGame({
@@ -145,7 +255,7 @@ const init = async () => {
       genre: "Action-Adventure",
       description:
         "Castlevania: Symphony of the Night stars Alucard as he explores Dracula's castle to uncover secrets and defeat powerful creatures.",
-      esrb_rating: "T",
+      ESRB_Rating: "T",
       image_url:
         "https://upload.wikimedia.org/wikipedia/en/c/cf/Castlevania_SOTN_PAL.jpg",
     }),
@@ -158,7 +268,7 @@ const init = async () => {
       genre: "Action-Adventure",
       description:
         "Super Metroid follows Samus Aran in her mission to rescue the baby Metroid from the Space Pirates and Mother Brain on planet Zebes.",
-      esrb_rating: "E",
+      ESRB_Rating: "E",
       image_url:
         "https://upload.wikimedia.org/wikipedia/en/e/e4/Smetroidbox.jpg",
     }),
@@ -171,7 +281,7 @@ const init = async () => {
       genre: "FPS",
       description:
         "Half-Life is a groundbreaking FPS where players assume the role of Gordon Freeman as he battles aliens and government soldiers in the Black Mesa Research Facility.",
-      esrb_rating: "M",
+      ESRB_Rating: "M",
       image_url:
         "https://upload.wikimedia.org/wikipedia/en/thumb/f/fa/Half-Life_Cover_Art.jpg/220px-Half-Life_Cover_Art.jpg",
     }),
@@ -184,7 +294,7 @@ const init = async () => {
       genre: "FPS",
       description:
         "Doom is a pioneering FPS game where players fight against demons from Hell on Mars as the unnamed space marine, known as Doomguy.",
-      esrb_rating: "M",
+      ESRB_Rating: "M",
       image_url:
         "https://upload.wikimedia.org/wikipedia/en/5/57/Doom_cover_art.jpg",
     }),
@@ -197,7 +307,7 @@ const init = async () => {
       genre: "Adventure",
       description:
         "The Secret of Monkey Island follows Guybrush Threepwood as he seeks to become a pirate and rescue the governor from the ghost pirate LeChuck.",
-      esrb_rating: "E",
+      ESRB_Rating: "E",
       image_url:
         "https://upload.wikimedia.org/wikipedia/en/a/a8/The_Secret_of_Monkey_Island_artwork.jpg",
     }),
@@ -210,7 +320,7 @@ const init = async () => {
       genre: "Action-Adventure",
       description:
         "Metroid introduces players to Samus Aran as she explores the planet Zebes to eradicate the Space Pirates and Mother Brain.",
-      esrb_rating: "E",
+      ESRB_Rating: "E",
       image_url:
         "https://upload.wikimedia.org/wikipedia/en/thumb/5/5d/Metroid_boxart.jpg/220px-Metroid_boxart.jpg",
     }),
@@ -223,7 +333,7 @@ const init = async () => {
       genre: "RPG",
       description:
         "EarthBound follows Ness and his friends as they embark on a journey to stop the alien Giygas from taking over the world using psychic powers and humor.",
-      esrb_rating: "E",
+      ESRB_Rating: "E",
       image_url:
         "https://upload.wikimedia.org/wikipedia/en/1/1f/EarthBound_Box.jpg",
     }),
@@ -236,7 +346,7 @@ const init = async () => {
       genre: "Rail Shooter",
       description:
         "Star Fox is a rail shooter where players control Fox McCloud and his team of anthropomorphic animals in spacecrafts to defend the Lylat system from Andross.",
-      esrb_rating: "E",
+      ESRB_Rating: "E",
       image_url:
         "https://upload.wikimedia.org/wikipedia/en/5/52/Star_Fox_SNES.jpg",
     }),
@@ -249,7 +359,7 @@ const init = async () => {
       genre: "Platformer",
       description:
         "Kirby's Adventure stars Kirby, a pink puffball with the ability to inhale enemies and gain their powers, on a quest to restore the Star Rod and save Dream Land from darkness.",
-      esrb_rating: "E",
+      ESRB_Rating: "E",
       image_url:
         "https://upload.wikimedia.org/wikipedia/en/thumb/a/ae/Kirby%27s_Adventure_Coverart.png/220px-Kirby%27s_Adventure_Coverart.png",
     }),
@@ -262,7 +372,7 @@ const init = async () => {
       genre: "Run and Gun",
       description:
         "Contra is a run-and-gun game where players control soldiers Bill and Lance in their mission to thwart an alien invasion by destroying enemy forces and bosses.",
-      esrb_rating: "E",
+      ESRB_Rating: "E",
       image_url:
         "https://upload.wikimedia.org/wikipedia/en/6/65/Contra_cover.jpg",
     }),
@@ -275,7 +385,7 @@ const init = async () => {
       genre: "Light Gun Shooter",
       description:
         "Duck Hunt is a light gun shooter where players use the NES Zapper to shoot ducks and clay pigeons as they appear on the screen.",
-      esrb_rating: "E",
+      ESRB_Rating: "E",
       image_url:
         "https://upload.wikimedia.org/wikipedia/en/thumb/1/14/DuckHuntBox.jpg/220px-DuckHuntBox.jpg",
     }),
@@ -288,7 +398,7 @@ const init = async () => {
       genre: "Puzzle",
       description:
         "Tetris is a tile-matching puzzle game where players rotate and arrange falling tetrominoes to create complete lines and prevent the stack from reaching the top of the screen.",
-      esrb_rating: "E",
+      ESRB_Rating: "E",
       image_url:
         "https://upload.wikimedia.org/wikipedia/en/4/4a/Tetris_Boxshot.jpg",
     }),
@@ -301,7 +411,7 @@ const init = async () => {
       genre: "Fighting",
       description:
         "Mortal Kombat is a fighting game known for its brutal combat and fatalities as players choose iconic fighters to battle in a tournament for supremacy.",
-      esrb_rating: "M",
+      ESRB_Rating: "M",
       image_url:
         "https://upload.wikimedia.org/wikipedia/en/3/33/Mortal_Kombat_cover.JPG",
     }),
@@ -314,7 +424,7 @@ const init = async () => {
       genre: "Survival Horror",
       description:
         "Resident Evil follows Chris Redfield and Jill Valentine of S.T.A.R.S. as they investigate a mansion filled with zombies and uncover the Umbrella Corporation's sinister experiments.",
-      esrb_rating: "M",
+      ESRB_Rating: "M",
       image_url:
         "https://upload.wikimedia.org/wikipedia/en/a/a6/Resident_Evil_1_cover.png",
     }),
@@ -327,7 +437,7 @@ const init = async () => {
       genre: "RPG",
       description:
         "Pokemon Red/Blue tasks players with becoming a Pokemon Trainer, capturing and training Pokemon to become the Pokemon Champion while thwarting Team Rocket's evil plans.",
-      esrb_rating: "E",
+      ESRB_Rating: "E",
       image_url:
         "https://pm1.aminoapps.com/6315/316ff2f9adf15e6b32b2b8aaf817b44bc4cff334_00.jpg",
     }),
@@ -340,7 +450,7 @@ const init = async () => {
       genre: "FPS",
       description:
         "GoldenEye 007 is an FPS where players assume the role of James Bond in a mission to stop a criminal syndicate from using a satellite weapon to destroy London.",
-      esrb_rating: "T",
+      ESRB_Rating: "T",
       image_url:
         "https://upload.wikimedia.org/wikipedia/en/3/36/GoldenEye007box.jpg",
     }),
@@ -353,7 +463,7 @@ const init = async () => {
       genre: "Action-Adventure",
       description:
         "The Legend of Zelda: Ocarina of Time follows Link as he travels through time to stop Ganondorf from obtaining the Triforce and conquering the kingdom of Hyrule.",
-      esrb_rating: "E",
+      ESRB_Rating: "E",
       image_url:
         "https://upload.wikimedia.org/wikibooks/en/9/98/Ocarina_of_Time_box_art.jpg",
     }),
@@ -366,7 +476,7 @@ const init = async () => {
       genre: "Racing",
       description:
         "Gran Turismo is a racing simulator where players compete in various races and challenges to earn credits and unlock new cars for their collection.",
-      esrb_rating: "E",
+      ESRB_Rating: "E",
       image_url:
         "https://upload.wikimedia.org/wikipedia/en/c/c8/Gran_Turismo_-_Cover_-_JP.jpg",
     }),
@@ -379,7 +489,7 @@ const init = async () => {
       genre: "Stealth Action",
       description:
         "Metal Gear Solid follows Solid Snake as he infiltrates a nuclear weapons facility to neutralize terrorists threatening to launch a nuclear strike.",
-      esrb_rating: "M",
+      ESRB_Rating: "M",
       image_url:
         "https://upload.wikimedia.org/wikipedia/en/3/33/Metal_Gear_Solid_cover_art.png",
     }),
@@ -392,7 +502,7 @@ const init = async () => {
       genre: "Platformer",
       description:
         "Crash Bandicoot stars Crash in his quest to rescue his girlfriend Tawna and thwart the evil plans of Dr. Neo Cortex by traversing various levels and defeating enemies.",
-      esrb_rating: "E",
+      ESRB_Rating: "E",
       image_url:
         "https://upload.wikimedia.org/wikipedia/en/4/44/Crash_Bandicoot_Cover.png",
     }),
@@ -405,7 +515,7 @@ const init = async () => {
       genre: "Sports",
       description:
         "Tony Hawk's Pro Skater allows players to skate as legendary skateboarders in various locations, performing tricks and completing objectives to earn points and unlock new content.",
-      esrb_rating: "T",
+      ESRB_Rating: "T",
       image_url:
         "https://upload.wikimedia.org/wikipedia/en/thumb/5/58/TonyHawksProSkaterPlayStation1.jpg/220px-TonyHawksProSkaterPlayStation1.jpg",
     }),
@@ -418,7 +528,7 @@ const init = async () => {
       genre: "RTS",
       description:
         "StarCraft is a real-time strategy game where players control one of three factions in a war for dominance across the galaxy by gathering resources, building bases, and commanding armies.",
-      esrb_rating: "T",
+      ESRB_Rating: "T",
       image_url:
         "https://upload.wikimedia.org/wikipedia/en/9/93/StarCraft_box_art.jpg",
     }),
@@ -431,7 +541,7 @@ const init = async () => {
       genre: "Action RPG",
       description:
         "Diablo II is an action RPG where players embark on a quest to defeat the Lord of Terror, Diablo, by exploring dungeons, collecting loot, and battling hordes of monsters.",
-      esrb_rating: "M",
+      ESRB_Rating: "M",
       image_url:
         "https://upload.wikimedia.org/wikipedia/en/d/d5/Diablo_II_Coverart.png",
     }),
@@ -444,7 +554,7 @@ const init = async () => {
       genre: "Sports, Fighting",
       description:
         "Super Punch-Out!! is a boxing video game where players control Little Mac as he fights his way to the top of the World Video Boxing Association by defeating various quirky opponents.",
-      esrb_rating: "E",
+      ESRB_Rating: "E",
       image_url:
         "https://upload.wikimedia.org/wikipedia/en/4/40/Superpunchoutbox.jpg",
     }),
@@ -457,7 +567,7 @@ const init = async () => {
       genre: "Action, Platformer",
       description:
         "Mega Man X is an action-platformer where players control X, a Maverick Hunter, as he battles against the forces of Sigma to save humanity from the rogue Reploids.",
-      esrb_rating: "E",
+      ESRB_Rating: "E",
       image_url:
         "https://upload.wikimedia.org/wikipedia/en/f/f1/Mega_Man_X_Coverart.png",
     }),
@@ -470,7 +580,7 @@ const init = async () => {
       genre: "First-person shooter",
       description:
         "Duke Nukem 3D is a first-person shooter where players control Duke Nukem as he battles alien invaders in a variety of urban environments, using a range of weapons and one-liners.",
-      esrb_rating: "M",
+      ESRB_Rating: "M",
       image_url:
         "https://upload.wikimedia.org/wikipedia/en/thumb/6/61/Duke_Nukem_3D_Coverart.png/220px-Duke_Nukem_3D_Coverart.png",
     }),
@@ -483,7 +593,7 @@ const init = async () => {
       genre: "Rail shooter",
       description:
         "Panzer Dragoon is a rail shooter where players control a dragon rider named Keil Fluge as he navigates through various levels, shooting down enemies and obstacles to prevent the return of an ancient weapon.",
-      esrb_rating: "E",
+      ESRB_Rating: "E",
       image_url: "https://i.ebayimg.com/images/g/dfQAAOSw4slj3-bZ/s-l400.jpg",
     }),
     createGame({
@@ -495,7 +605,7 @@ const init = async () => {
       genre: "Beat 'em up",
       description:
         "The Simpsons Arcade Game is a beat 'em up game where players control members of the Simpson family as they fight through various levels to rescue Maggie from the clutches of Mr. Burns and Smithers.",
-      esrb_rating: "Not Rated",
+      ESRB_Rating: "Not Rated",
       image_url:
         "https://www.metacritic.com/a/img/catalog/provider/6/12/6-1-222935-52.jpg",
     }),
@@ -508,9 +618,21 @@ const init = async () => {
       genre: "Action, Dungeon crawler",
       description:
         "Gauntlet is an action dungeon crawler where players control one of four characters (Warrior, Valkyrie, Wizard, or Elf) as they navigate through maze-like dungeons, battling monsters and collecting treasures.",
-      esrb_rating: "Not Rated",
+      ESRB_Rating: "Not Rated",
       image_url:
         "https://upload.wikimedia.org/wikipedia/en/8/8a/Gauntlet_game_flyer.png",
+    }),
+    createGame({
+      title: "Kamen Rider SD",
+      release_date: 1993,
+      developer: "Banpresto",
+      publisher: "Bandai",
+      platform: "Super Famicom",
+      genre: "Action, Platformer",
+      description:
+        "Kamen Rider SD is an action platformer game featuring characters from the Kamen Rider series in a super-deformed (SD) style. Players control Kamen Riders as they battle enemies across various levels, using their unique abilities to defeat foes and progress through the game.",
+      ESRB_Rating: "Not Rated",
+      image_url: "https://i.ebayimg.com/images/g/1XUAAOSwhcJWI24q/s-l600.jpg",
     }),
   ]);
 
@@ -533,6 +655,22 @@ app.get("/api/games", async (req, res, next) => {
   }
 });
 
+app.get("/api/games/:id", async (req, res, next) => {
+  console.log("route hit");
+
+  try {
+    res.send(await fetchGame({ id: req.params.id }));
+    // const SQL = `SELECT * FROM games WHERE id = $1`;
+    // const response = await client.query(SQL, [req.params.id]);
+    // const game = response.rows[0];
+    // if (!game) {
+    //   res.status(404).json(game);
+    // }
+  } catch (error) {
+    next(error);
+  }
+});
+
 app.post("/games/:id", (req, res) => {
   const { id } = req.params;
   const { logo } = req.body;
@@ -543,6 +681,30 @@ app.post("/games/:id", (req, res) => {
     res.send({
       title: `Games with your ${logo} and ID of ${id}`,
     });
+  }
+});
+
+app.get("/api/games/:id/reviews", async (req, res, next) => {
+  try {
+    const reviews = await fetchReviewsByGameId(req.params.id);
+    res.status(200).send(reviews);
+  } catch (error) {
+    next(error);
+  }
+});
+
+app.post("/api/games/:id/reviews", async (req, res, next) => {
+  try {
+    const { reviewer, comment, rating } = req.body;
+    const newReview = await createReview({
+      game_id: req.params.id,
+      reviewer,
+      comment,
+      rating,
+    });
+    res.status(201).send(newReview);
+  } catch (error) {
+    next(error);
   }
 });
 
