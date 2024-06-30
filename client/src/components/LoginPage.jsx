@@ -18,9 +18,10 @@ function LoginPage({ handleLogin }) {
     <div className="d-flex justify-content-center align-items-center vh-10 bg-dark text-white">
       <div className="card bg-dark text-white p-14">
         <img
-          src="covers/logo-3.png" // change here to insert image
+          src="covers/logo-3.png"
           className="card-img-top"
           alt="Header"
+          style={{ width: "300px", height: "auto" }}
         />
         <h2 className="text-center mt-3">Login</h2>
         <form onSubmit={onSubmit}>
