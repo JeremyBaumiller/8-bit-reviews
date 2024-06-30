@@ -33,7 +33,7 @@ const GameDetailPage = () => {
       {loading && <p>Loading...</p>}
       {error && <p>Error: {error}</p>}
       {data && (
-        <div className="row mt-4">
+        <div className="row mt-4 border border-warning rounded-lg p-3">
           <div className="col-md-6">
             <h1>{data.title}</h1>
             <p>Release Date: {data.release_date}</p>
