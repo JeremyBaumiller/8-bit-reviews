@@ -27,7 +27,7 @@ const Navbar = () => {
             className="logo"
             alt="Logo"
             width="120"
-            height="100"
+            height="80"
           />
         </Link>
         <button
