@@ -1,11 +1,13 @@
 const {
   client,
   createGame,
+  createUser,
   createTable,
   fetchGames,
   fetchGame,
   createReview,
   fetchReviewsByGameId,
+  fetchUsers,
 } = require("./db2");
 const express = require("express");
 const cors = require("cors");
@@ -20,7 +22,6 @@ app.use(express.json());
 app.use(cors());
 app.use(express.static(path.join(__dirname, "client", "public")));
 
-// Connect to the database and initialize tables
 const init = async () => {
   //try {
   await client.connect();
@@ -29,106 +30,107 @@ const init = async () => {
   //console.log(await fetchGames());
   console.log("Table created");
 
-  const users = [
-    {
+  const [] = await Promise.all([
+    createUser({
       id: "c8d5c0b4-1fd1-4b6d-9e77-4d3f847dc7db",
       username: "Mario",
       email: "mario@example.com",
       password: "password1",
       join_date: "2023-01-01",
-    },
-    {
+    }),
+    createUser({
       id: "7c9e6679-7425-40de-944b-e07fc1f90ae7",
       username: "Link",
       email: "link@example.com",
       password: "password2",
       join_date: "2023-02-01",
-    },
-    {
-      id: "bbeb7643-7c77-4443-8f6b-4d72b4f7cbbe",
-      username: "Samus",
-      email: "samus@example.com",
-      password: "password3",
-      join_date: "2023-03-01",
-    },
-    {
-      id: "32c8db2f-9e0b-4d7d-9ff7-f72f3fef482f",
-      username: "LaraCroft",
-      email: "laracroft@example.com",
-      password: "password6",
-      join_date: "2023-06-01",
-    },
-    {
-      id: "c1e19d5f-7955-40b4-92b4-e0b0e5a2a4b4",
-      username: "MasterChief",
-      email: "masterchief@example.com",
-      password: "password7",
-      join_date: "2023-07-01",
-    },
-    {
-      id: "ab3e2899-6055-4d1f-b3e2-ffdbd05d7c4d",
-      username: "Kratos",
-      email: "kratos@example.com",
-      password: "password8",
-      join_date: "2023-08-01",
-    },
-    {
-      id: "fde0b94a-5280-42d9-ae3d-1c2e7f7a2b4d",
-      username: "Cloud",
-      email: "cloud@example.com",
-      password: "password10",
-      join_date: "2023-10-01",
-    },
-    {
-      id: "bbd17643-7c77-4443-8f6b-4d72b4f7cbca",
-      username: "NathanDrake",
-      email: "nathandrake@example.com",
-      password: "password13",
-      join_date: "2024-01-01",
-    },
-    {
-      id: "f3f5a8d8-f24e-4d36-8a91-329ddf9d0e66",
-      username: "Dante",
-      email: "dante@example.com",
-      password: "password15",
-      join_date: "2024-03-01",
-    },
-    {
-      id: "32d8eb2f-9e0b-4d7d-9ff7-f72f3fef593f",
-      username: "GordonFreeman",
-      email: "gordonfreeman@example.com",
-      password: "password16",
-      join_date: "2024-04-01",
-    },
-    {
-      id: "c1f29d5f-7955-40b4-92b4-e0b0e5a2a5b5",
-      username: "SolidSnake",
-      email: "solidsnake@example.com",
-      password: "password17",
-      join_date: "2024-05-01",
-    },
-    {
-      id: "ab4f2899-6055-4d1f-b3e2-ffdbd05d8d5d",
-      username: "Ellie",
-      email: "ellie@example.com",
-      password: "password18",
-      join_date: "2024-06-01",
-    },
-    {
-      id: "7d60b8d9-6859-4f3b-ae3f-3fb0d7c9d8e4",
-      username: "JillValentine",
-      email: "jillvalentine@example.com",
-      password: "password19",
-      join_date: "2024-07-01",
-    },
-    {
-      id: "fde1b94a-5280-42d9-ae3d-1c2e7f7a2b5e",
-      username: "CommanderShepard",
-      email: "commandershepard@example.com",
-      password: "password20",
-      join_date: "2024-08-01",
-    },
-  ];
+    }),
+  ]);
+
+  // {
+  //   id: "bbeb7643-7c77-4443-8f6b-4d72b4f7cbbe",
+  //   username: "Samus",
+  //   email: "samus@example.com",
+  //   password: "password3",
+  //   join_date: "2023-03-01",
+  // },
+  // {
+  //   id: "32c8db2f-9e0b-4d7d-9ff7-f72f3fef482f",
+  //   username: "LaraCroft",
+  //   email: "laracroft@example.com",
+  //   password: "password6",
+  //   join_date: "2023-06-01",
+  // },
+  // {
+  //   id: "c1e19d5f-7955-40b4-92b4-e0b0e5a2a4b4",
+  //   username: "MasterChief",
+  //   email: "masterchief@example.com",
+  //   password: "password7",
+  //   join_date: "2023-07-01",
+  // },
+  // {
+  //   id: "ab3e2899-6055-4d1f-b3e2-ffdbd05d7c4d",
+  //   username: "Kratos",
+  //   email: "kratos@example.com",
+  //   password: "password8",
+  //   join_date: "2023-08-01",
+  // },
+  // {
+  //   id: "fde0b94a-5280-42d9-ae3d-1c2e7f7a2b4d",
+  //   username: "Cloud",
+  //   email: "cloud@example.com",
+  //   password: "password10",
+  //   join_date: "2023-10-01",
+  // },
+  // {
+  //   id: "bbd17643-7c77-4443-8f6b-4d72b4f7cbca",
+  //   username: "NathanDrake",
+  //   email: "nathandrake@example.com",
+  //   password: "password13",
+  //   join_date: "2024-01-01",
+  // },
+  // {
+  //   id: "f3f5a8d8-f24e-4d36-8a91-329ddf9d0e66",
+  //   username: "Dante",
+  //   email: "dante@example.com",
+  //   password: "password15",
+  //   join_date: "2024-03-01",
+  // },
+  // {
+  //   id: "32d8eb2f-9e0b-4d7d-9ff7-f72f3fef593f",
+  //   username: "GordonFreeman",
+  //   email: "gordonfreeman@example.com",
+  //   password: "password16",
+  //   join_date: "2024-04-01",
+  // },
+  // {
+  //   id: "c1f29d5f-7955-40b4-92b4-e0b0e5a2a5b5",
+  //   username: "SolidSnake",
+  //   email: "solidsnake@example.com",
+  //   password: "password17",
+  //   join_date: "2024-05-01",
+  // },
+  // {
+  //   id: "ab4f2899-6055-4d1f-b3e2-ffdbd05d8d5d",
+  //   username: "Ellie",
+  //   email: "ellie@example.com",
+  //   password: "password18",
+  //   join_date: "2024-06-01",
+  // },
+  // {
+  //   id: "7d60b8d9-6859-4f3b-ae3f-3fb0d7c9d8e4",
+  //   username: "JillValentine",
+  //   email: "jillvalentine@example.com",
+  //   password: "password19",
+  //   join_date: "2024-07-01",
+  // },
+  // {
+  //   id: "fde1b94a-5280-42d9-ae3d-1c2e7f7a2b5e",
+  //   username: "CommanderShepard",
+  //   email: "commandershepard@example.com",
+  //   password: "password20",
+  //   join_date: "2024-08-01",
+  // },
 
   const [] = await Promise.all([
     createGame({
@@ -635,7 +637,7 @@ const init = async () => {
       image_url: "https://i.ebayimg.com/images/g/1XUAAOSwhcJWI24q/s-l600.jpg",
     }),
   ]);
-
+  console.log(await fetchUsers());
   console.log(await fetchGames());
   console.log("Games created");
   //} catch (error) {
@@ -646,6 +648,14 @@ const init = async () => {
 init();
 
 // Routes
+app.get("/api/users", async (req, res, next) => {
+  try {
+    res.send(await fetchUsers());
+  } catch (error) {
+    next(error);
+  }
+});
+
 app.get("/api/games", async (req, res, next) => {
   try {
     const games = await fetchGames();
@@ -660,12 +670,6 @@ app.get("/api/games/:id", async (req, res, next) => {
 
   try {
     res.send(await fetchGame({ id: req.params.id }));
-    // const SQL = `SELECT * FROM games WHERE id = $1`;
-    // const response = await client.query(SQL, [req.params.id]);
-    // const game = response.rows[0];
-    // if (!game) {
-    //   res.status(404).json(game);
-    // }
   } catch (error) {
     next(error);
   }

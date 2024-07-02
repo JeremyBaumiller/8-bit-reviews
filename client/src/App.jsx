@@ -15,7 +15,7 @@ import "./App.css";
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-
+  const [users, setUsers] = useState([]);
   const handleLogin = () => {
     setIsAuthenticated(true);
   };
@@ -41,7 +41,10 @@ const App = () => {
         <Route path="/games" element={<GameListPage />} />
         <Route path="/games/:id" element={<GameDetailPage />} />
         <Route path="/submit-review" element={<SubmitReviewPage />} />
-        <Route path="/profile" element={<UserProfilePage />} />
+        <Route
+          path="/profile"
+          element={<UserProfilePage users={users} setUsers={setUsers} />}
+        />
         <Route
           path="/login"
           element={<LoginPage handleLogin={handleLogin} />}

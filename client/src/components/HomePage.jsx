@@ -4,8 +4,11 @@ import "bootstrap/dist/js/bootstrap.bundle.min";
 
 const HomePage = ({ handleLogout }) => {
   useEffect(() => {
-    // Manually initialize the carousel
-    window.$("#gameCarousel").carousel();
+    // Initialize the carousel using Bootstrap's native JavaScript API
+    const carouselElement = document.getElementById("gameCarousel");
+    const bootstrapCarousel = new window.bootstrap.Carousel(carouselElement, {
+      interval: 3000, // Set interval to 5 seconds
+    });
   }, []);
 
   return (
@@ -25,21 +28,20 @@ const HomePage = ({ handleLogout }) => {
         <div
           id="gameCarousel"
           className="carousel slide"
-          data-ride="carousel"
-          data-interval="5000" // Set interval to 5 seconds
+          data-bs-ride="carousel"
         >
           <ul className="carousel-indicators">
             <li
-              data-target="#gameCarousel"
-              data-slide-to="0"
+              data-bs-target="#gameCarousel"
+              data-bs-slide-to="0"
               className="active"
             ></li>
-            <li data-target="#gameCarousel" data-slide-to="1"></li>
-            <li data-target="#gameCarousel" data-slide-to="2"></li>
-            <li data-target="#gameCarousel" data-slide-to="3"></li>
-            <li data-target="#gameCarousel" data-slide-to="4"></li>
-            <li data-target="#gameCarousel" data-slide-to="5"></li>
-            <li data-target="#gameCarousel" data-slide-to="6"></li>
+            <li data-bs-target="#gameCarousel" data-bs-slide-to="1"></li>
+            <li data-bs-target="#gameCarousel" data-bs-slide-to="2"></li>
+            <li data-bs-target="#gameCarousel" data-bs-slide-to="3"></li>
+            <li data-bs-target="#gameCarousel" data-bs-slide-to="4"></li>
+            <li data-bs-target="#gameCarousel" data-bs-slide-to="5"></li>
+            <li data-bs-target="#gameCarousel" data-bs-slide-to="6"></li>
           </ul>
           <div className="carousel-inner">
             <div className="carousel-item active">
@@ -96,7 +98,7 @@ const HomePage = ({ handleLogout }) => {
             className="carousel-control-prev"
             href="#gameCarousel"
             role="button"
-            data-slide="prev"
+            data-bs-slide="prev"
           >
             <span
               className="carousel-control-prev-icon"
@@ -108,7 +110,7 @@ const HomePage = ({ handleLogout }) => {
             className="carousel-control-next"
             href="#gameCarousel"
             role="button"
-            data-slide="next"
+            data-bs-slide="next"
           >
             <span
               className="carousel-control-next-icon"

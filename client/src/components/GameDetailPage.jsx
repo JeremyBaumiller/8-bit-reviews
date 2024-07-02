@@ -29,11 +29,18 @@ const GameDetailPage = () => {
   }, [id]);
 
   return (
-    <div className="container">
+    <div
+      className="container bg-dark text-light"
+      style={{
+        border: "5px solid gold",
+        borderRadius: "10px",
+        padding: "20px",
+      }}
+    >
       {loading && <p>Loading...</p>}
       {error && <p>Error: {error}</p>}
       {data && (
-        <div className="row mt-4 border border-warning rounded-lg p-3">
+        <div className="row mt-4">
           <div className="col-md-6">
             <h1>{data.title}</h1>
             <p>Release Date: {data.release_date}</p>
@@ -44,12 +51,12 @@ const GameDetailPage = () => {
             <p>Description: {data.description}</p>
             <p>ESRB Rating: {data.esrb_rating}</p>
           </div>
-          <div className="col-md-6">
+          <div className="col-md-6 d-flex justify-content-center align-items-center">
             <img
               src={data.image_url}
               alt={data.title}
               className="img-fluid"
-              style={{ maxHeight: "300px", objectFit: "fill" }}
+              style={{ width: "300px", height: "300px", objectFit: "contain" }}
             />
           </div>
         </div>
