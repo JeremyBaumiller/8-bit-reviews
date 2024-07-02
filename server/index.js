@@ -20,8 +20,14 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(cors());
-app.use(express.static(path.join(__dirname, "client", "public")));
-
+//app.use(express.static(path.join(__dirname, "client", "public")));
+app.get("/", (req, res) =>
+  res.sendFile(path.join(__dirname, "../client/dist/index.html"))
+);
+app.use(
+  "/assets",
+  express.static(path.join(__dirname, "../client/dist/assets"))
+);
 const init = async () => {
   //try {
   await client.connect();
@@ -37,6 +43,8 @@ const init = async () => {
       email: "mario@example.com",
       password: "password1",
       join_date: "2023-01-01",
+      image_url:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMk5lXjt8WO3iCoNXzDDYEOv4c_v1DnR0isw&s",
     }),
     createUser({
       id: "7c9e6679-7425-40de-944b-e07fc1f90ae7",
@@ -44,93 +52,118 @@ const init = async () => {
       email: "link@example.com",
       password: "password2",
       join_date: "2023-02-01",
+      image_url:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbnTmQOfE2MS8ndNazMK3e0_xC2ZGY8eHm5A&s",
+    }),
+    createUser({
+      id: "bbeb7643-7c77-4443-8f6b-4d72b4f7cbbe",
+      username: "Samus",
+      email: "samus@example.com",
+      password: "password3",
+      join_date: "2023-03-01",
+      image_url:
+        "https://external-preview.redd.it/ZAs5NgcM2M6t0QqZiaQsKDI9TMwmSTTJkCfEAIOJQKU.jpg?width=640&crop=smart&auto=webp&s=083bfa305a565082aa8e16bce890fea6e8e58617",
+    }),
+    createUser({
+      id: "32c8db2f-9e0b-4d7d-9ff7-f72f3fef482f",
+      username: "LaraCroft",
+      email: "laracroft@example.com",
+      password: "password6",
+      join_date: "2023-06-01",
+      image_url:
+        "https://pbs.twimg.com/profile_images/1295398740254027776/b3NhwST0_400x400.jpg",
+    }),
+    createUser({
+      id: "c1e19d5f-7955-40b4-92b4-e0b0e5a2a4b4",
+      username: "MasterChief",
+      email: "masterchief@example.com",
+      password: "password7",
+      join_date: "2023-07-01",
+      image_url:
+        "https://pbs.twimg.com/profile_images/1487458038479003651/QaaBLRjC_400x400.jpg",
+    }),
+    createUser({
+      id: "ab3e2899-6055-4d1f-b3e2-ffdbd05d7c4d",
+      username: "Kratos",
+      email: "kratos@example.com",
+      password: "password8",
+      join_date: "2023-08-01",
+      image_url:
+        "https://pbs.twimg.com/profile_images/1531848535443791872/2DU_fNTn_400x400.jpg",
+    }),
+    createUser({
+      id: "fde0b94a-5280-42d9-ae3d-1c2e7f7a2b4d",
+      username: "Cloud",
+      email: "cloud@example.com",
+      password: "password10",
+      join_date: "2023-10-01",
+      image_url:
+        "https://pbs.twimg.com/profile_images/1506965037482536961/PLau5P3a_400x400.jpg",
+    }),
+    createUser({
+      id: "bbd17643-7c77-4443-8f6b-4d72b4f7cbca",
+      username: "NathanDrake",
+      email: "nathandrake@example.com",
+      password: "password13",
+      join_date: "2024-01-01",
+      image_url:
+        "https://i.pinimg.com/originals/3d/08/5f/3d085fcfd035c20a099f2c7e12ae4f0b.jpg",
+    }),
+    createUser({
+      id: "f3f5a8d8-f24e-4d36-8a91-329ddf9d0e66",
+      username: "Dante",
+      email: "dante@example.com",
+      password: "password15",
+      join_date: "2024-03-01",
+      image_url:
+        "https://steamuserimages-a.akamaihd.net/ugc/28476336363410364/A2A967006BE76961F00056717D8099752E900F5D/?imw=512&&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false",
+    }),
+    createUser({
+      id: "32d8eb2f-9e0b-4d7d-9ff7-f72f3fef593f",
+      username: "GordonFreeman",
+      email: "gordonfreeman@example.com",
+      password: "password16",
+      join_date: "2024-04-01",
+      image_url:
+        "https://i1.sndcdn.com/artworks-000196534350-fh799u-t500x500.jpg",
+    }),
+    createUser({
+      id: "c1f29d5f-7955-40b4-92b4-e0b0e5a2a5b5",
+      username: "SolidSnake",
+      email: "solidsnake@example.com",
+      password: "password17",
+      join_date: "2024-05-01",
+      image_url:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTj4JC8OiEI7oo0dK2vmA__IMyEJXrIkljnOA&s",
+    }),
+    createUser({
+      id: "ab4f2899-6055-4d1f-b3e2-ffdbd05d8d5d",
+      username: "Ellie",
+      email: "ellie@example.com",
+      password: "password18",
+      join_date: "2024-06-01",
+      image_url:
+        "https://64.media.tumblr.com/3f16d430e3e19f6bd6379f7ca677ff78/6942db55fb4ae225-0a/s1280x1920/241e6e440b9357d55cdf5ce232f60f6baa13be4a.jpg",
+    }),
+    createUser({
+      id: "7d60b8d9-6859-4f3b-ae3f-3fb0d7c9d8e4",
+      username: "JillValentine",
+      email: "jillvalentine@example.com",
+      password: "password19",
+      join_date: "2024-07-01",
+      image_url:
+        "https://i.pinimg.com/736x/3f/4d/79/3f4d790de267dc562102674d066843c9.jpg",
+    }),
+    createUser({
+      id: "fde1b94a-5280-42d9-ae3d-1c2e7f7a2b5e",
+      username: "CommanderShepard",
+      email: "commandershepard@example.com",
+      password: "password20",
+      join_date: "2024-08-01",
+      image_url:
+        "https://i.pinimg.com/originals/3d/7d/d1/3d7dd1a86956eb44ff3f679a68a4a4cc.png",
     }),
   ]);
-
-  // {
-  //   id: "bbeb7643-7c77-4443-8f6b-4d72b4f7cbbe",
-  //   username: "Samus",
-  //   email: "samus@example.com",
-  //   password: "password3",
-  //   join_date: "2023-03-01",
-  // },
-  // {
-  //   id: "32c8db2f-9e0b-4d7d-9ff7-f72f3fef482f",
-  //   username: "LaraCroft",
-  //   email: "laracroft@example.com",
-  //   password: "password6",
-  //   join_date: "2023-06-01",
-  // },
-  // {
-  //   id: "c1e19d5f-7955-40b4-92b4-e0b0e5a2a4b4",
-  //   username: "MasterChief",
-  //   email: "masterchief@example.com",
-  //   password: "password7",
-  //   join_date: "2023-07-01",
-  // },
-  // {
-  //   id: "ab3e2899-6055-4d1f-b3e2-ffdbd05d7c4d",
-  //   username: "Kratos",
-  //   email: "kratos@example.com",
-  //   password: "password8",
-  //   join_date: "2023-08-01",
-  // },
-  // {
-  //   id: "fde0b94a-5280-42d9-ae3d-1c2e7f7a2b4d",
-  //   username: "Cloud",
-  //   email: "cloud@example.com",
-  //   password: "password10",
-  //   join_date: "2023-10-01",
-  // },
-  // {
-  //   id: "bbd17643-7c77-4443-8f6b-4d72b4f7cbca",
-  //   username: "NathanDrake",
-  //   email: "nathandrake@example.com",
-  //   password: "password13",
-  //   join_date: "2024-01-01",
-  // },
-  // {
-  //   id: "f3f5a8d8-f24e-4d36-8a91-329ddf9d0e66",
-  //   username: "Dante",
-  //   email: "dante@example.com",
-  //   password: "password15",
-  //   join_date: "2024-03-01",
-  // },
-  // {
-  //   id: "32d8eb2f-9e0b-4d7d-9ff7-f72f3fef593f",
-  //   username: "GordonFreeman",
-  //   email: "gordonfreeman@example.com",
-  //   password: "password16",
-  //   join_date: "2024-04-01",
-  // },
-  // {
-  //   id: "c1f29d5f-7955-40b4-92b4-e0b0e5a2a5b5",
-  //   username: "SolidSnake",
-  //   email: "solidsnake@example.com",
-  //   password: "password17",
-  //   join_date: "2024-05-01",
-  // },
-  // {
-  //   id: "ab4f2899-6055-4d1f-b3e2-ffdbd05d8d5d",
-  //   username: "Ellie",
-  //   email: "ellie@example.com",
-  //   password: "password18",
-  //   join_date: "2024-06-01",
-  // },
-  // {
-  //   id: "7d60b8d9-6859-4f3b-ae3f-3fb0d7c9d8e4",
-  //   username: "JillValentine",
-  //   email: "jillvalentine@example.com",
-  //   password: "password19",
-  //   join_date: "2024-07-01",
-  // },
-  // {
-  //   id: "fde1b94a-5280-42d9-ae3d-1c2e7f7a2b5e",
-  //   username: "CommanderShepard",
-  //   email: "commandershepard@example.com",
-  //   password: "password20",
-  //   join_date: "2024-08-01",
-  // },
 
   const [] = await Promise.all([
     createGame({
@@ -649,7 +682,9 @@ init();
 
 // Routes
 app.get("/api/users", async (req, res, next) => {
+  console.log("hit");
   try {
+    //const SQL = `SELECT * FROM users`;
     res.send(await fetchUsers());
   } catch (error) {
     next(error);

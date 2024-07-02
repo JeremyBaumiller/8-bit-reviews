@@ -8,11 +8,11 @@ const SubmitReviewPage = () => {
   const [reviewsList, setReviewsList] = useState([]);
   const navigate = useNavigate();
 
-  // Fetch reviews from your API
+  // Fetch reviews
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const response = await fetch("https://your-api-url/reviews");
+        const response = await fetch("http://localhost:3000/api/reviews");
         if (!response.ok) {
           throw new Error("Failed to fetch reviews");
         }
@@ -33,7 +33,8 @@ const SubmitReviewPage = () => {
       const newReview = { review, rating };
 
       // Make POST request to submit review to API
-      const response = await fetch("https://your-api-url/submit-review", {
+      const response = await fetch("http://localhost:3000/api/review", {
+        // may need to add s to review?
         method: "POST",
         headers: {
           "Content-Type": "application/json",

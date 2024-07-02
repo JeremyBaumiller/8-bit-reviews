@@ -16,7 +16,8 @@ CREATE TABLE users (
     username VARCHAR(50) NOT NULL UNIQUE,
     email VARCHAR(100) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
-    join_date DATE NOT NULL
+    join_date DATE NOT NULL,
+    image_url TEXT
 );
 CREATE TABLE games (
     id UUID PRIMARY KEY,
@@ -46,11 +47,17 @@ CREATE TABLE reviews (
 
 // create new user
 
-const createUser = async ({ username, email, password, join_date }) => {
+const createUser = async ({
+  username,
+  email,
+  password,
+  join_date,
+  image_url,
+}) => {
   const hashedPassword = await bcrypt.hash(password, 10);
   const SQL = `
-    INSERT INTO users (id, username, email, password, join_date)
-    VALUES ($1, $2, $3, $4, $5) RETURNING *
+    INSERT INTO users (id, username, email, password, join_date, image_url)
+    VALUES ($1, $2, $3, $4, $5, $6) RETURNING *
   `;
   const response = await client.query(SQL, [
     uuid.v4(),
@@ -58,6 +65,7 @@ const createUser = async ({ username, email, password, join_date }) => {
     email,
     hashedPassword,
     join_date,
+    image_url,
   ]);
   return response.rows[0];
 };
