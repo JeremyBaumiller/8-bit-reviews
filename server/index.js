@@ -20,7 +20,6 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(cors());
-//app.use(express.static(path.join(__dirname, "client", "public")));
 app.get("/", (req, res) =>
   res.sendFile(path.join(__dirname, "../client/dist/index.html"))
 );
@@ -29,11 +28,9 @@ app.use(
   express.static(path.join(__dirname, "../client/dist/assets"))
 );
 const init = async () => {
-  //try {
   await client.connect();
   console.log("Connected to database");
   await createTable();
-  //console.log(await fetchGames());
   console.log("Table created");
 
   const [] = await Promise.all([
@@ -670,21 +667,44 @@ const init = async () => {
       image_url: "https://i.ebayimg.com/images/g/1XUAAOSwhcJWI24q/s-l600.jpg",
     }),
   ]);
+
+  const [] = await Promise.all([
+    createReview({
+      review_date: 2024 - 6 - 25,
+      rating: 5,
+      title: "Timeless Classic",
+      content:
+        "Super Mario Bros. is a game that never gets old. The level design is brilliant, and the gameplay is incredibly fun.",
+    }),
+    createReview({
+      review_date: 2024 - 6 - 27,
+      rating: 5,
+      title: "Epic Adventure",
+      content:
+        "The Legend of Zelda is a masterpiece. The story, the puzzles, and the exploration make it an unforgettable experience.",
+    }),
+    createReview({
+      review_date: 2024 - 6 - 29,
+      rating: 5,
+      title: "Revolutionary Shooter",
+      content:
+        "Half-Life revolutionized the FPS genre. The story, the gameplay, and the atmosphere are all top-notch.",
+    }),
+  ]);
+
   console.log(await fetchUsers());
   console.log(await fetchGames());
+  console.log(await fetchReviewsByGameId);
   console.log("Games created");
-  //} catch (error) {
-  // console.error("Initialization error: ", error);
-  //}
 };
 
 init();
 
 // Routes
+
 app.get("/api/users", async (req, res, next) => {
   console.log("hit");
   try {
-    //const SQL = `SELECT * FROM users`;
     res.send(await fetchUsers());
   } catch (error) {
     next(error);
@@ -734,12 +754,13 @@ app.get("/api/games/:id/reviews", async (req, res, next) => {
 
 app.post("/api/games/:id/reviews", async (req, res, next) => {
   try {
-    const { reviewer, comment, rating } = req.body;
+    const { users_id, title, rating, content } = req.body;
     const newReview = await createReview({
       game_id: req.params.id,
-      reviewer,
-      comment,
+      users_id,
+      title,
       rating,
+      content,
     });
     res.status(201).send(newReview);
   } catch (error) {

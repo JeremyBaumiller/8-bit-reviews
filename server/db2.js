@@ -33,9 +33,9 @@ CREATE TABLE games (
     );
 CREATE TABLE reviews (
     id UUID PRIMARY KEY,
-    game_id UUID REFERENCES games(id) NOT NULL,
-    users_id UUID REFERENCES users(id)NOT NULL,
-    review_date DATE NOT NULL,
+    game_id UUID REFERENCES games(id),
+    users_id UUID REFERENCES users(id),
+    review_date DATE,
     rating INT CHECK (rating >= 1 AND rating <= 10),
     title VARCHAR(100),
     content TEXT
@@ -70,6 +70,8 @@ const createUser = async ({
   return response.rows[0];
 };
 
+//create new game
+
 const createGame = async ({
   title,
   release_date,
@@ -98,6 +100,25 @@ const createGame = async ({
   return response.rows[0];
 };
 
+//Create new review
+
+const createReview = async ({ game_id, users_id, title, rating, content }) => {
+  const SQL = `
+    INSERT INTO reviews (id, game_id, users_id, title, rating, content)
+    VALUES ($1, $2, $3, $4, $5, $6)
+    RETURNING *;
+  `;
+  const response = await client.query(SQL, [
+    uuid.v4(),
+    game_id,
+    users_id,
+    title,
+    rating,
+    content,
+  ]);
+  return response.rows[0];
+};
+
 const fetchUsers = async () => {
   const SQL = `SELECT * FROM users`;
   const response = await client.query(SQL);
@@ -117,29 +138,12 @@ const fetchGame = async ({ id }) => {
   return response.rows[0];
 };
 
-//Create a new review
-const createReview = async ({ game_id, reviewer, comment, rating }) => {
-  const SQL = `
-    INSERT INTO reviews (game_id, reviewer, comment, rating)
-    VALUES ($1, $2, $3, $4)
-    RETURNING *;
-  `;
-  const response = await client.query(SQL, [
-    game_id,
-    reviewer,
-    comment,
-    rating,
-  ]);
-  return response.rows[0];
-};
-
-//Fetch reviews for a game
-const fetchReviewsByGameId = async (game_id) => {
-  const SQL = `
-    SELECT * FROM reviews WHERE game_id = $1 ORDER BY review_date DESC;
+const fetchReviewsByGameId = async ({ game_id }) => {
+  console.log("fetch review route is hit");
+  const SQL = `SELECT * FROM reviews WHERE game_id = $1 ORDER BY review_date DESC;
   `;
   const response = await client.query(SQL, [game_id]);
-  return response.rows;
+  return response.rows[0];
 };
 
 module.exports = {

@@ -33,14 +33,17 @@ const SubmitReviewPage = () => {
       const newReview = { review, rating };
 
       // Make POST request to submit review to API
-      const response = await fetch("http://localhost:3000/api/review", {
-        // may need to add s to review?
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newReview),
-      });
+      const response = await fetch(
+        `http://localhost:3000/api/games/${gameId}/reviews`,
+        {
+          // may need to add s to review?
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newReview),
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Failed to submit review");
