@@ -12,7 +12,9 @@ const SubmitReviewPage = () => {
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const response = await fetch("http://localhost:3000/api/reviews");
+        const response = await fetch(
+          "https://eight-bit-reviews.onrender.com/api/reviews"
+        );
         if (!response.ok) {
           throw new Error("Failed to fetch reviews");
         }
@@ -34,7 +36,7 @@ const SubmitReviewPage = () => {
 
       // Make POST request to submit review to API
       const response = await fetch(
-        `http://localhost:3000/api/games/${gameId}/reviews`,
+        `https://eight-bit-reviews.onrender.com/api/games/${gameId}/reviews`,
         {
           // may need to add s to review?
           method: "POST",

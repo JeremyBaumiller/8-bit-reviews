@@ -12,7 +12,9 @@ const GameDetailPage = () => {
       setLoading(true);
       setError(null);
       try {
-        const response = await fetch(`http://localhost:3000/api/games/${id}`);
+        const response = await fetch(
+          `https://eight-bit-reviews.onrender.com/api/games/${id}`
+        );
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }

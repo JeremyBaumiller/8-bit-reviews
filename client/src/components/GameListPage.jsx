@@ -5,7 +5,7 @@ const GameListPage = () => {
   const [games, setGames] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/games")
+    fetch("https://eight-bit-reviews.onrender.com/api/games")
       .then((response) => response.json())
       .then((data) => setGames(data))
       .catch((error) => console.error("Error fetching games:", error));
