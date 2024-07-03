@@ -3,7 +3,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import HomePage from "./components/HomePage";
 import LoginPage from "./components/LoginPage";
 import Navbar from "./components/Navbar";
-import Header from "./components/Header";
+//import Header from "./components/Header";
 import Footer from "./components/Footer";
 import GameListPage from "./components/GameListPage";
 import GameDetailPage from "./components/GameDetailPage";
